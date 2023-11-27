@@ -1,0 +1,16 @@
+.from-left-enter {
+    opacity: 0;
+    transform: translateX(-10%);
+}
+
+.from-right-enter {
+    opacity: 0;
+    transform: translateX(10%);
+}
+
+.from-left-enter-active,
+.from-right-enter-active {
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 1000ms, transform 1000ms;
+}

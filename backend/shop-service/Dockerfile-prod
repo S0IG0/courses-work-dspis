@@ -1,0 +1,19 @@
+FROM openjdk:19-alpine as build
+WORKDIR shop-service
+
+COPY . .
+
+RUN apk add gradle
+RUN gradle wrapper
+RUN ./gradlew build
+
+EXPOSE 8080
+
+FROM openjdk:19-alpine
+WORKDIR service-library
+
+COPY --from=build /shop-service/build/libs/*.jar /shop-service/app.jar
+
+
+CMD ["java", "-jar", "/shop-service/app.jar"]
+

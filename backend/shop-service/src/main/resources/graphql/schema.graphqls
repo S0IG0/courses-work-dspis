@@ -1,0 +1,76 @@
+interface BaseEntity {
+    id: ID!
+    created: String!
+    updated: String!
+}
+
+type Message implements BaseEntity{
+    id: ID!
+    created: String!
+    updated: String!
+
+    text: String!
+}
+
+type Category implements BaseEntity{
+    id: ID!
+    created: String!
+    updated: String!
+
+    name: String!
+}
+
+
+type Item implements BaseEntity{
+    id: ID!
+    created: String!
+    updated: String!
+
+    name: String!
+    description: String!
+    categories: [Category!]!
+    image: String!
+    price: Float!
+}
+
+input ItemInput {
+    name: String!
+    description: String!
+    categories: [ID!]!
+    image: String!
+    price: Float!
+}
+
+input ItemUpdate {
+    name: String
+    description: String
+    categories: [ID!]
+    image: String
+    price: Float
+}
+
+
+type Query {
+    findAllMessages: [Message!]!
+    findAllCategories: [Category!]!
+    findAllItems: [Item!]!
+}
+
+
+type Mutation {
+    sendMessage(message: String!): String!
+    createCategory(name: String!): Category!
+    updateCategory(id: ID!, name: String!): Category!
+    createItem(item: ItemInput): Item!
+    updateItem(id: ID!, item: ItemUpdate): Item!
+}
+
+type Subscription {
+    messages: String
+}
+
+schema {
+    query: Query
+    mutation: Mutation,
+    subscription: Subscription
+}

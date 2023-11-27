@@ -1,0 +1,44 @@
+{
+  "name": "frontend-library",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host",
+    "build": "tsc && vite build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview",
+    "generate": "npx graphql-codegen --config ./src/component/api/types/codegen.yml "
+  },
+  "dependencies": {
+    "@apollo/client": "^3.8.7",
+    "@types/color-hash": "^1.0.5",
+    "@types/react-transition-group": "^4.4.9",
+    "bootstrap": "^5.3.2",
+    "bootstrap-icons": "^1.11.2",
+    "color-hash": "^2.0.2",
+    "graphql": "^16.8.1",
+    "graphql-ws": "^5.14.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.20.0",
+    "react-transition-group": "^4.4.5",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "^5.0.0",
+    "@graphql-codegen/typescript": "^4.0.1",
+    "@graphql-codegen/typescript-operations": "^4.0.1",
+    "@types/react": "^18.2.37",
+    "@types/react-dom": "^18.2.15",
+    "@types/uuid": "^9.0.7",
+    "@typescript-eslint/eslint-plugin": "^6.10.0",
+    "@typescript-eslint/parser": "^6.10.0",
+    "@vitejs/plugin-react-swc": "^3.5.0",
+    "eslint": "^8.53.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.4",
+    "typescript": "^5.2.2",
+    "vite": "^5.0.0"
+  }
+}

@@ -1,0 +1,13 @@
+.card {
+    cursor: pointer;
+    transition: 500ms;
+}
+
+.card:hover {
+    scale: 1.01;
+}
+
+.card:active {
+    transition: 250ms;
+    scale: 1;
+}

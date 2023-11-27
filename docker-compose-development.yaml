@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+  db-postgres:
+    ports:
+      - "5555:5432"
+  nginx:
+    build:
+      context: nginx
+      dockerfile: Dockerfile-dev
+    volumes:
+      - ./nginx/conf/nginx-dev.conf:/etc/nginx/conf.d/default.conf
+  auth-service:
+    ports:
+      - "8000:8000"
+  shop-service:
+    build:
+      context: backend/shop-service
+      dockerfile: Dockerfile-dev
+    volumes:
+      - ./backend/shop-service/src/:/shop-service/src
+    environment:
+      - GRAPHIQL=true
+    ports:
+      - "8080:8080"
+
+
