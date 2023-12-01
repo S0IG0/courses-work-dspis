@@ -1,10 +1,11 @@
-import React, {useRef, useState, KeyboardEvent, useEffect, useCallback} from "react";
-import {gql, useMutation, useSubscription} from "@apollo/client";
-import {SendMessageMutation} from "@api/mutation";
+import {useRef, useState, KeyboardEvent, useEffect, useCallback} from "react";
+import {gql, useMutation, useQuery, useSubscription} from "@apollo/client";
 import ColorHash from 'color-hash';
 import {v1 as uuid} from "uuid";
 import {Transition, TransitionGroup} from "react-transition-group";
 import "@ui/css/animate-chat.css"
+import {SendMessageMutation} from "@api/graphql/mutation";
+import {findAllMessages} from "@api/graphql/query";
 
 const colorHash = new ColorHash();
 
@@ -81,7 +82,7 @@ export function Chat() {
 
     const {data} = useSubscription(gql`subscription Messages { messages }`);
 
-    React.useEffect(() => {
+    useEffect(() => {
         if (data && data.messages) {
             const temp = JSON.parse(data.messages)
             setMessages((prevMessages) =>
@@ -97,6 +98,26 @@ export function Chat() {
             scrollingDivRef.current.scrollIntoView({behavior: "smooth"});
         }
     }, [messages]);
+
+
+    const {data: messagesData, loading: messageLoading} = useQuery<{ findAllMessages: Message[] }>(
+        findAllMessages,
+        {
+            pollInterval: 1000,
+        }
+    );
+
+    useEffect(() => {
+        if (messagesData) {
+            setMessages([...messagesData
+                .findAllMessages
+                .map(message => {
+                    const temp = JSON.parse(message.text)
+                    return {...temp, isMy: temp.clientId !== clientId};
+                })
+            ])
+        }
+    }, [messageLoading, messagesData]);
 
     return (
         <div className="m-2">

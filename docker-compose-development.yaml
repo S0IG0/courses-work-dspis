@@ -24,4 +24,20 @@ services:
     ports:
       - "8080:8080"
 
+  frontend:
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+    volumes:
+      - ./frontend/public:/frontend/public
+      - ./frontend/src:/frontend/src
+      - ./frontend/.eslintrc.cjs:/frontend/.eslintrc.cjs
+      - ./frontend/index.html:/frontend/index.html
+      - ./frontend/tsconfig.json:/frontend/tsconfig.json
+      - ./frontend/tsconfig.node.json:/frontend/tsconfig.node.json
+      - ./frontend/vite.config.ts:/frontend/vite.config.ts
+    ports:
+      - "5173:5173"
+    command: [ "npm", "run", "dev" ]
+
 

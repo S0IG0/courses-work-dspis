@@ -12,6 +12,9 @@ export default defineConfig({
             '@page': "/src/component/page",
             '@route': "/src/component/route",
             '@api': "/src/component/api",
+            '@service': "/src/component/service",
+            '@model': "/src/component/model",
+            '@store': "/src/component/store",
         }
     },
 

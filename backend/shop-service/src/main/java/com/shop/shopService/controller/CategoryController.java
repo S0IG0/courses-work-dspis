@@ -45,4 +45,10 @@ public class CategoryController {
                         .build()
         );
     }
+
+    @MutationMapping
+    String deleteCategory(@Argument Long id) {
+        categoryService.deleteById(id);
+        return "delete category " + id;
+    }
 }

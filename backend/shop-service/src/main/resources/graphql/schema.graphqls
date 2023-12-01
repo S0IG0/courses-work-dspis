@@ -63,6 +63,8 @@ type Mutation {
     updateCategory(id: ID!, name: String!): Category!
     createItem(item: ItemInput): Item!
     updateItem(id: ID!, item: ItemUpdate): Item!
+
+    deleteCategory(id: ID!): String
 }
 
 type Subscription {
